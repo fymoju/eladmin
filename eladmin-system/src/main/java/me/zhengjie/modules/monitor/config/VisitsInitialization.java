@@ -1,5 +1,6 @@
 package me.zhengjie.modules.monitor.config;
 
+import me.zhengjie.modules.monitor.repository.VisitsRepository;
 import me.zhengjie.modules.monitor.service.VisitsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -15,6 +16,7 @@ public class VisitsInitialization implements ApplicationRunner {
 
     @Autowired
     private VisitsService visitsService;
+
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

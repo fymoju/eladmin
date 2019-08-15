@@ -31,6 +31,7 @@ public class DictController {
     @PreAuthorize("hasAnyRole('ADMIN','DICT_ALL','DICT_SELECT')")
     public ResponseEntity getDicts(DictDTO resources, Pageable pageable){
         return new ResponseEntity(dictService.queryAll(resources,pageable),HttpStatus.OK);
+
     }
 
     @Log("新增字典")

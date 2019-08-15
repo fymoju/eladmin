@@ -4,9 +4,17 @@ spring:
     druid:
       type: com.alibaba.druid.pool.DruidDataSource
       driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-      url: jdbc:log4jdbc:mysql://localhost:3306/eladmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+#      primary:
+#            url: jdbc:log4jdbc:mysql://localhost:3306/eladmin?serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
+#            username: root
+#            password: 1234
+
+#      secondary:
+      url: jdbc:log4jdbc:mysql://localhost:3306/eladmin002?nullCatalogMeansCurrent=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&useSSL=false
       username: root
-      password: 123456
+      password: 1234
+
+
 
       # 初始化配置
       initial-size: 3
@@ -35,11 +43,31 @@ spring:
         url-pattern: /*
         exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
 
+    activiti:
+  #    database-schema-update
+  #    false：false为默认值，设置为该值后，Activiti在启动时，会对比数据库表中保存的版本，如果版本不匹配时，将在启动时抛出异常。
+      #true：设置为该值后，Activiti会对数据库中所有的表进行更新，如果表不存在，则Activiti会自动创建。
+      #create-drop：Activiti启动时，会执行数据库表的创建操作，在Activiti关闭时，执行数据库表的删除操作。
+      #drop-create：Activiti启动时，执行数据库表的删除操作在Activiti关闭时，会执行数据库表的创建操作。
+      database-schema-update: true
+      check-process-definitions: true
+      process-definition-location-prefix: classpath:/processes/
+  #    process-definition-location-suffixes:
+  #      - **.bpmn
+  #      - **.bpmn20.xml
+  #    保存历史数据级别设置为full最高级别，便于历史数据的追溯
+      history-level: full
+      security-basic-enabled: false
+
+
+
   #配置 Jpa
   jpa:
     hibernate:
       # 生产环境设置成 none，避免程序运行时自动更新数据库结构
       ddl-auto: update
+    database: mysql
+
 
 #jwt
 jwt:
